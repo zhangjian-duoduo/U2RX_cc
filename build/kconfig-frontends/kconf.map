@@ -1,0 +1,855 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+                              /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o (__libc_csu_init)
+/usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+                              libs/parser/yconf.o (stat)
+
+As-needed library included to satisfy reference by file (symbol)
+
+libncurses.so.5               libs/lxdialog/checklist.o (doupdate)
+libtinfo.so.5                 libs/lxdialog/checklist.o (acs_map)
+
+分配公共符号
+公共符号            大小              文件
+
+item_cur            0x8               libs/lxdialog/util.o
+zconfleng           0x4               libs/parser/yconf.o
+rootmenu            0x60              libs/parser/yconf.o
+modules_val         0x4               libs/parser/yconf.o
+zconfdebug          0x4               libs/parser/yconf.o
+current_file        0x8               libs/parser/yconf.o
+zconflval           0x8               libs/parser/yconf.o
+zconftext           0x8               libs/parser/yconf.o
+saved_y             0x4               libs/lxdialog/util.o
+sym_defconfig_list  0x8               libs/parser/yconf.o
+symbol_hash         0x137a8           libs/parser/yconf.o
+dlg                 0x2c8             libs/lxdialog/util.o
+sym_env_list        0x8               libs/parser/yconf.o
+item_head           0x8               libs/lxdialog/util.o
+zconfnerrs          0x4               libs/parser/yconf.o
+current_buf         0x8               libs/parser/yconf.o
+item_nil            0xe8              libs/lxdialog/util.o
+modules_sym         0x8               libs/parser/yconf.o
+file_list           0x8               libs/parser/yconf.o
+dialog_input_result
+                    0x801             libs/lxdialog/inputbox.o
+zconfchar           0x4               libs/parser/yconf.o
+saved_x             0x4               libs/lxdialog/util.o
+
+舍弃的输入节
+
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ .gnu_debuglink
+                0x0000000000000000        0xc /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+ .gnu_debuglink
+                0x0000000000000000        0xc /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/lxdialog/checklist.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/lxdialog/inputbox.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/lxdialog/menubox.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/lxdialog/textbox.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/lxdialog/util.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/lxdialog/yesno.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 frontends/mconf/mconf.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 libs/parser/yconf.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+ .gnu_debuglink
+                0x0000000000000000        0xc /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+
+内存配置
+
+名称           来源             长度             属性
+*default*        0x0000000000000000 0xffffffffffffffff
+
+链结器命令稿和内存映射
+
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+LOAD libs/lxdialog/checklist.o
+LOAD libs/lxdialog/inputbox.o
+LOAD libs/lxdialog/menubox.o
+LOAD libs/lxdialog/textbox.o
+LOAD libs/lxdialog/util.o
+LOAD libs/lxdialog/yesno.o
+LOAD frontends/mconf/mconf.o
+LOAD libs/parser/yconf.o
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/libncurses.so
+LOAD /lib/x86_64-linux-gnu/libncurses.so.5
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/libtinfo.so
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/libgcc.a
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/libgcc_s.so
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/libc.so
+START GROUP
+LOAD /lib/x86_64-linux-gnu/libc.so.6
+LOAD /usr/lib/x86_64-linux-gnu/libc_nonshared.a
+LOAD /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+END GROUP
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/libgcc.a
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/libgcc_s.so
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+LOAD /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+                0x0000000000400000                PROVIDE (__executable_start, 0x400000)
+                0x0000000000400238                . = (0x400000 + SIZEOF_HEADERS)
+
+.interp         0x0000000000400238       0x1c
+ *(.interp)
+ .interp        0x0000000000400238       0x1c /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.note.ABI-tag   0x0000000000400254       0x20
+ .note.ABI-tag  0x0000000000400254       0x20 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.note.gnu.build-id
+                0x0000000000400274       0x24
+ *(.note.gnu.build-id)
+ .note.gnu.build-id
+                0x0000000000400274       0x24 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.hash
+ *(.hash)
+
+.gnu.hash       0x0000000000400298       0x4c
+ *(.gnu.hash)
+ .gnu.hash      0x0000000000400298       0x4c /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.dynsym         0x00000000004002e8      0xa80
+ *(.dynsym)
+ .dynsym        0x00000000004002e8      0xa80 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.dynstr         0x0000000000400d68      0x3e1
+ *(.dynstr)
+ .dynstr        0x0000000000400d68      0x3e1 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.gnu.version    0x000000000040114a       0xe0
+ *(.gnu.version)
+ .gnu.version   0x000000000040114a       0xe0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.gnu.version_d  0x0000000000401230        0x0
+ *(.gnu.version_d)
+ .gnu.version_d
+                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.gnu.version_r  0x0000000000401230       0x60
+ *(.gnu.version_r)
+ .gnu.version_r
+                0x0000000000401230       0x60 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.rela.dyn       0x0000000000401290       0x90
+ *(.rela.init)
+ *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+ .rela.text     0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ *(.rela.fini)
+ *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+ *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+ *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+ *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+ *(.rela.ctors)
+ *(.rela.dtors)
+ *(.rela.got)
+ .rela.got      0x0000000000401290       0x18 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+ .rela.bss      0x00000000004012a8       0x78 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ *(.rela.ldata .rela.ldata.* .rela.gnu.linkonce.l.*)
+ *(.rela.lbss .rela.lbss.* .rela.gnu.linkonce.lb.*)
+ *(.rela.lrodata .rela.lrodata.* .rela.gnu.linkonce.lr.*)
+ *(.rela.ifunc)
+
+.rela.plt       0x0000000000401320      0x930
+ *(.rela.plt)
+ .rela.plt      0x0000000000401320      0x930 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x0000000000401c50                PROVIDE (__rela_iplt_start, .)
+ *(.rela.iplt)
+ .rela.iplt     0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x0000000000401c50                PROVIDE (__rela_iplt_end, .)
+
+.init           0x0000000000401c50       0x1a
+ *(SORT(.init))
+ .init          0x0000000000401c50       0x15 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+                0x0000000000401c50                _init
+ .init          0x0000000000401c65        0x5 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+
+.plt            0x0000000000401c70      0x630
+ *(.plt)
+ .plt           0x0000000000401c70      0x630 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x0000000000401c80                wtouchln
+                0x0000000000401c90                getenv@@GLIBC_2.2.5
+                0x0000000000401ca0                free@@GLIBC_2.2.5
+                0x0000000000401cb0                strcasecmp@@GLIBC_2.2.5
+                0x0000000000401cc0                __errno_location@@GLIBC_2.2.5
+                0x0000000000401cd0                strncpy@@GLIBC_2.2.5
+                0x0000000000401ce0                strncmp@@GLIBC_2.2.5
+                0x0000000000401cf0                strcpy@@GLIBC_2.2.5
+                0x0000000000401d00                mkdir@@GLIBC_2.2.5
+                0x0000000000401d10                toupper@@GLIBC_2.2.5
+                0x0000000000401d20                puts@@GLIBC_2.2.5
+                0x0000000000401d30                qsort@@GLIBC_2.2.5
+                0x0000000000401d40                has_colors
+                0x0000000000401d50                waddch
+                0x0000000000401d60                vsnprintf@@GLIBC_2.2.5
+                0x0000000000401d70                cbreak
+                0x0000000000401d80                getpid@@GLIBC_2.2.5
+                0x0000000000401d90                waddnstr
+                0x0000000000401da0                fclose@@GLIBC_2.2.5
+                0x0000000000401db0                regfree@@GLIBC_2.2.5
+                0x0000000000401dc0                wclrtoeol
+                0x0000000000401dd0                strlen@@GLIBC_2.2.5
+                0x0000000000401de0                wbkgdset
+                0x0000000000401df0                init_pair
+                0x0000000000401e00                chdir@@GLIBC_2.2.5
+                0x0000000000401e10                __stack_chk_fail@@GLIBC_2.4
+                0x0000000000401e20                wrefresh
+                0x0000000000401e30                strchr@@GLIBC_2.2.5
+                0x0000000000401e40                printf@@GLIBC_2.2.5
+                0x0000000000401e50                keypad
+                0x0000000000401e60                initscr
+                0x0000000000401e70                _IO_putc@@GLIBC_2.2.5
+                0x0000000000401e80                subwin
+                0x0000000000401e90                snprintf@@GLIBC_2.2.5
+                0x0000000000401ea0                strrchr@@GLIBC_2.2.5
+                0x0000000000401eb0                uname@@GLIBC_2.2.5
+                0x0000000000401ec0                __assert_fail@@GLIBC_2.2.5
+                0x0000000000401ed0                fputs@@GLIBC_2.2.5
+                0x0000000000401ee0                start_color
+                0x0000000000401ef0                newwin
+                0x0000000000401f00                memset@@GLIBC_2.2.5
+                0x0000000000401f10                strncat@@GLIBC_2.2.5
+                0x0000000000401f20                close@@GLIBC_2.2.5
+                0x0000000000401f30                strspn@@GLIBC_2.2.5
+                0x0000000000401f40                regcomp@@GLIBC_2.2.5
+                0x0000000000401f50                fputc@@GLIBC_2.2.5
+                0x0000000000401f60                strcspn@@GLIBC_2.2.5
+                0x0000000000401f70                read@@GLIBC_2.2.5
+                0x0000000000401f80                __libc_start_main@@GLIBC_2.2.5
+                0x0000000000401f90                memcmp@@GLIBC_2.2.5
+                0x0000000000401fa0                strtoull@@GLIBC_2.2.5
+                0x0000000000401fb0                calloc@@GLIBC_2.2.5
+                0x0000000000401fc0                winch
+                0x0000000000401fd0                strcmp@@GLIBC_2.2.5
+                0x0000000000401fe0                signal@@GLIBC_2.2.5
+                0x0000000000401ff0                strtoll@@GLIBC_2.2.5
+                0x0000000000402000                fprintf@@GLIBC_2.2.5
+                0x0000000000402020                strtol@@GLIBC_2.2.5
+                0x0000000000402030                clearerr@@GLIBC_2.2.5
+                0x0000000000402040                delwin
+                0x0000000000402050                memcpy@@GLIBC_2.14
+                0x0000000000402060                fileno@@GLIBC_2.2.5
+                0x0000000000402070                __xstat@@GLIBC_2.2.5
+                0x0000000000402080                tolower@@GLIBC_2.2.5
+                0x0000000000402090                wprintw
+                0x00000000004020a0                malloc@@GLIBC_2.2.5
+                0x00000000004020b0                strncasecmp@@GLIBC_2.2.5
+                0x00000000004020c0                _IO_getc@@GLIBC_2.2.5
+                0x00000000004020d0                wnoutrefresh
+                0x00000000004020e0                nodelay
+                0x00000000004020f0                vprintf@@GLIBC_2.2.5
+                0x0000000000402100                regexec@@GLIBC_2.3.4
+                0x0000000000402110                strpbrk@@GLIBC_2.2.5
+                0x0000000000402120                ungetch
+                0x0000000000402130                realloc@@GLIBC_2.2.5
+                0x0000000000402140                flash
+                0x0000000000402150                setlocale@@GLIBC_2.2.5
+                0x0000000000402160                memmove@@GLIBC_2.2.5
+                0x0000000000402170                scrollok
+                0x0000000000402180                endwin
+                0x0000000000402190                wgetch
+                0x00000000004021a0                open@@GLIBC_2.2.5
+                0x00000000004021b0                fopen@@GLIBC_2.2.5
+                0x00000000004021c0                perror@@GLIBC_2.2.5
+                0x00000000004021d0                rename@@GLIBC_2.2.5
+                0x00000000004021e0                vfprintf@@GLIBC_2.2.5
+                0x00000000004021f0                noecho
+                0x0000000000402200                doupdate
+                0x0000000000402210                strcat@@GLIBC_2.2.5
+                0x0000000000402220                sprintf@@GLIBC_2.2.5
+                0x0000000000402230                exit@@GLIBC_2.2.5
+                0x0000000000402240                fwrite@@GLIBC_2.2.5
+                0x0000000000402250                wmove
+                0x0000000000402260                strdup@@GLIBC_2.2.5
+                0x0000000000402270                wscrl
+                0x0000000000402280                rand@@GLIBC_2.2.5
+                0x0000000000402290                __ctype_b_loc@@GLIBC_2.3
+ *(.iplt)
+ .iplt          0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.text           0x00000000004022a0    0x18390
+ *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+ *(.text.exit .text.exit.*)
+ *(.text.startup .text.startup.*)
+ *(.text.hot .text.hot.*)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x00000000004022a0       0x2a /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x00000000004022a0                _start
+ .text          0x00000000004022ca        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+ *fill*         0x00000000004022ca        0x6 
+ .text          0x00000000004022d0       0xbd /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+ .text          0x000000000040238d      0xf3d libs/lxdialog/checklist.o
+                0x0000000000402839                dialog_checklist
+ .text          0x00000000004032ca      0xc56 libs/lxdialog/inputbox.o
+                0x000000000040337d                dialog_inputbox
+ .text          0x0000000000403f20     0x1272 libs/lxdialog/menubox.o
+                0x000000000040449e                dialog_menu
+ .text          0x0000000000405192      0xedd libs/lxdialog/textbox.o
+                0x00000000004051fb                dialog_textbox
+ .text          0x000000000040606f     0x2001 libs/lxdialog/util.o
+                0x0000000000406be4                attr_clear
+                0x0000000000406c8f                dialog_clear
+                0x0000000000406f51                init_dialog
+                0x0000000000407054                set_dialog_backtitle
+                0x0000000000407069                set_dialog_subtitles
+                0x000000000040707e                end_dialog
+                0x00000000004070b9                print_title
+                0x00000000004071b5                print_autowrap
+                0x0000000000407571                print_button
+                0x000000000040771b                draw_box
+                0x0000000000407926                draw_shadow
+                0x0000000000407a33                first_alpha
+                0x0000000000407b19                on_key_esc
+                0x0000000000407bd2                on_key_resize
+                0x0000000000407be2                item_reset
+                0x0000000000407c39                item_make
+                0x0000000000407d4c                item_add_str
+                0x0000000000407e46                item_set_tag
+                0x0000000000407e62                item_set_data
+                0x0000000000407e7e                item_set_selected
+                0x0000000000407e97                item_activate_selected
+                0x0000000000407f07                item_data
+                0x0000000000407f1b                item_tag
+                0x0000000000407f2f                item_count
+                0x0000000000407f66                item_set
+                0x0000000000407fdb                item_n
+                0x0000000000408026                item_str
+                0x0000000000408033                item_is_selected
+                0x000000000040804e                item_is_tag
+ .text          0x0000000000408070      0x488 libs/lxdialog/yesno.o
+                0x0000000000408121                dialog_yesno
+ .text          0x00000000004084f8     0x1dc7 frontends/mconf/mconf.o
+                0x000000000040a0fa                main
+ .text          0x000000000040a2bf    0x102df libs/parser/yconf.o
+                0x000000000040a935                zconfparse
+                0x000000000040c3ef                conf_parse
+                0x000000000040ce22                zconfdump
+                0x000000000040d19d                zconflex
+                0x000000000040e3ff                zconfrestart
+                0x000000000040e4ad                zconf_switch_to_buffer
+                0x000000000040e628                zconf_create_buffer
+                0x000000000040e6b7                zconf_delete_buffer
+                0x000000000040e7dc                zconf_flush_buffer
+                0x000000000040e877                zconfpush_buffer_state
+                0x000000000040e979                zconfpop_buffer_state
+                0x000000000040eb85                zconf_scan_buffer
+                0x000000000040ec7f                zconf_scan_string
+                0x000000000040eca9                zconf_scan_bytes
+                0x000000000040edaa                zconfget_lineno
+                0x000000000040edb6                zconfget_in
+                0x000000000040edc3                zconfget_out
+                0x000000000040edd0                zconfget_leng
+                0x000000000040eddc                zconfget_text
+                0x000000000040ede9                zconfset_lineno
+                0x000000000040edfb                zconfset_in
+                0x000000000040ee10                zconfset_out
+                0x000000000040ee25                zconfget_debug
+                0x000000000040ee31                zconfset_debug
+                0x000000000040eea4                zconflex_destroy
+                0x000000000040ef4d                zconfalloc
+                0x000000000040ef67                zconfrealloc
+                0x000000000040ef8c                zconffree
+                0x000000000040efa6                zconf_starthelp
+                0x000000000040efef                zconf_fopen
+                0x000000000040f0d0                zconf_initscan
+                0x000000000040f168                zconf_nextfile
+                0x000000000040f454                zconf_lineno
+                0x000000000040f460                zconf_curname
+                0x000000000040f484                file_lookup
+                0x000000000040f53b                file_write_dep
+                0x000000000040f73c                str_new
+                0x000000000040f78d                str_free
+                0x000000000040f7cf                str_append
+                0x000000000040f866                str_printf
+                0x000000000040f952                str_get
+                0x000000000040f964                xmalloc
+                0x000000000040f9b7                xcalloc
+                0x000000000040fb44                conf_set_message_callback
+                0x000000000040fc0a                conf_get_configname
+                0x000000000040fc34                conf_get_autoconfig_name
+                0x000000000040fdfb                conf_get_default_confname
+                0x00000000004102a6                conf_read_simple
+                0x0000000000410a68                conf_read
+                0x0000000000411269                conf_write_defconfig
+                0x0000000000411485                conf_write
+                0x0000000000411d8e                conf_write_autoconf
+                0x000000000041201a                sym_set_change_count
+                0x0000000000412062                sym_add_change_count
+                0x0000000000412081                conf_get_changed
+                0x0000000000412092                conf_set_changed_callback
+                0x00000000004121e6                set_all_choice_values
+                0x0000000000412280                conf_set_all_new_symbols
+                0x00000000004126fe                expr_alloc_symbol
+                0x0000000000412739                expr_alloc_one
+                0x0000000000412776                expr_alloc_two
+                0x00000000004127c3                expr_alloc_comp
+                0x0000000000412810                expr_alloc_and
+                0x0000000000412851                expr_alloc_or
+                0x0000000000412892                expr_copy
+                0x00000000004129a8                expr_free
+                0x0000000000412be2                expr_eliminate_eq
+                0x0000000000413205                expr_trans_bool
+                0x0000000000413d6d                expr_eliminate_dups
+                0x0000000000413def                expr_transform
+                0x0000000000414302                expr_contains_symbol
+                0x00000000004143e0                expr_depends_symbol
+                0x00000000004144ea                expr_trans_compare
+                0x00000000004148b4                expr_calc_value
+                0x0000000000414ce2                expr_simplify_unmet_dep
+                0x0000000000414dd3                expr_print
+                0x0000000000415388                expr_fprint
+                0x00000000004154ea                expr_gstr_print
+                0x000000000041555e                sym_init
+                0x000000000041560c                sym_get_type
+                0x0000000000415663                sym_type_name
+                0x00000000004156af                sym_get_choice_prop
+                0x00000000004156f0                sym_get_env_prop
+                0x0000000000415ccc                sym_choice_default
+                0x0000000000415e85                sym_calc_value
+                0x00000000004164b5                sym_clear_all_valid
+                0x0000000000416531                sym_tristate_within_range
+                0x0000000000416619                sym_set_tristate_value
+                0x0000000000416763                sym_toggle_tristate_value
+                0x00000000004167d6                sym_string_valid
+                0x0000000000416988                sym_string_within_range
+                0x0000000000416b90                sym_set_string_value
+                0x0000000000416d71                sym_get_string_default
+                0x0000000000416f07                sym_get_string_value
+                0x0000000000416f88                sym_is_changable
+                0x0000000000416fe4                sym_lookup
+                0x0000000000417194                sym_find
+                0x000000000041729f                sym_expand_string_value
+                0x000000000041750f                sym_escape_string_value
+                0x0000000000417765                sym_re_search
+                0x00000000004182b0                sym_check_deps
+                0x00000000004183c4                prop_alloc
+                0x0000000000418465                prop_get_symbol
+                0x00000000004184ad                prop_get_type_name
+                0x0000000000418670                menu_warn
+                0x000000000041884c                _menu_init
+                0x0000000000418876                menu_add_entry
+                0x000000000041891f                menu_end_entry
+                0x0000000000418925                menu_add_menu
+                0x0000000000418957                menu_end_menu
+                0x0000000000418a46                menu_add_dep
+                0x0000000000418a8a                menu_set_type
+                0x0000000000418cc4                menu_add_prompt
+                0x0000000000418cf3                menu_add_visibility
+                0x0000000000418d2c                menu_add_expr
+                0x0000000000418d58                menu_add_symbol
+                0x0000000000418d8f                menu_add_option
+                0x000000000041915b                menu_finalize
+                0x0000000000419adf                menu_has_prompt
+                0x0000000000419b02                menu_is_empty
+                0x0000000000419b4c                menu_is_visible
+                0x0000000000419c7d                menu_get_prompt
+                0x0000000000419cc2                menu_get_root_menu
+                0x0000000000419cd1                menu_get_parent_menu
+                0x0000000000419d21                menu_has_help
+                0x0000000000419d39                menu_get_help
+                0x000000000041a428                get_relations_str
+                0x000000000041a4d8                menu_get_ext_help
+ *fill*         0x000000000041a59e        0x2 
+ .text          0x000000000041a5a0       0x72 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+                0x000000000041a5a0                __libc_csu_init
+                0x000000000041a610                __libc_csu_fini
+ *fill*         0x000000000041a612        0xe 
+ .text          0x000000000041a620       0x10 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+                0x000000000041a620                __stat
+                0x000000000041a620                stat
+ .text          0x000000000041a630        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+ .text          0x000000000041a630        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+ *(.gnu.warning)
+
+.fini           0x000000000041a630        0x9
+ *(SORT(.fini))
+ .fini          0x000000000041a630        0x4 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+                0x000000000041a630                _fini
+ .fini          0x000000000041a634        0x5 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+                0x000000000041a639                PROVIDE (__etext, .)
+                0x000000000041a639                PROVIDE (_etext, .)
+                0x000000000041a639                PROVIDE (etext, .)
+
+.rodata         0x000000000041a640     0x7208
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata.cst4   0x000000000041a640        0x4 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x000000000041a640                _IO_stdin_used
+ .rodata        0x000000000041a644       0x1b libs/lxdialog/checklist.o
+ .rodata        0x000000000041a65f        0xe libs/lxdialog/inputbox.o
+ .rodata        0x000000000041a66d       0x39 libs/lxdialog/menubox.o
+ .rodata        0x000000000041a6a6        0xf libs/lxdialog/textbox.o
+ .rodata        0x000000000041a6b5       0x48 libs/lxdialog/util.o
+ .rodata        0x000000000041a6fd        0xd libs/lxdialog/yesno.o
+ *fill*         0x000000000041a70a       0x16 
+ .rodata        0x000000000041a720     0x29ad frontends/mconf/mconf.o
+ *fill*         0x000000000041d0cd       0x13 
+ .rodata        0x000000000041d0e0     0x4768 libs/parser/yconf.o
+                0x000000000041fdc0                conf_defname
+
+.rodata1
+ *(.rodata1)
+
+.eh_frame_hdr   0x0000000000421848      0x9ec
+ *(.eh_frame_hdr)
+ .eh_frame_hdr  0x0000000000421848      0x9ec /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.eh_frame       0x0000000000422238     0x293c
+ *(.eh_frame)
+ .eh_frame      0x0000000000422238       0x30 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ .eh_frame      0x0000000000422268       0x40 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ .eh_frame      0x00000000004222a8       0x90 libs/lxdialog/checklist.o
+                                         0xa0 (松开之前的大小)
+ .eh_frame      0x0000000000422338       0x40 libs/lxdialog/inputbox.o
+                                         0x58 (松开之前的大小)
+ .eh_frame      0x0000000000422378       0xa8 libs/lxdialog/menubox.o
+                                         0xc0 (松开之前的大小)
+ .eh_frame      0x0000000000422420       0xf0 libs/lxdialog/textbox.o
+                                        0x100 (松开之前的大小)
+ .eh_frame      0x0000000000422510      0x4c8 libs/lxdialog/util.o
+                                        0x4d0 (松开之前的大小)
+ .eh_frame      0x00000000004229d8       0x40 libs/lxdialog/yesno.o
+                                         0x58 (松开之前的大小)
+ .eh_frame      0x0000000000422a18      0x400 frontends/mconf/mconf.o
+                                        0x408 (松开之前的大小)
+ .eh_frame      0x0000000000422e18     0x1ce0 libs/parser/yconf.o
+                                       0x1c78 (松开之前的大小)
+ .eh_frame      0x0000000000424af8       0x60 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+                                         0x78 (松开之前的大小)
+ .eh_frame      0x0000000000424b58       0x18 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+                                         0x30 (松开之前的大小)
+ .eh_frame      0x0000000000424b70        0x4 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges .exception_ranges*)
+                0x0000000000424b74                . = (ALIGN (0x200000) - ((0x200000 - .) & 0x1fffff))
+                0x0000000000624dec                . = DATA_SEGMENT_ALIGN (0x200000, 0x1000)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges .exception_ranges*)
+
+.tdata
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x0000000000624dec        0x0
+                0x0000000000624dec                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x0000000000624dec                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x0000000000624df0        0x8
+                0x0000000000624df0                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*) SORT(.ctors.*))
+ *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
+ .init_array    0x0000000000624df0        0x8 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+                0x0000000000624df8                PROVIDE (__init_array_end, .)
+
+.fini_array     0x0000000000624df8        0x8
+                0x0000000000624df8                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*) SORT(.dtors.*))
+ *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
+ .fini_array    0x0000000000624df8        0x8 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+                0x0000000000624e00                PROVIDE (__fini_array_end, .)
+
+.ctors
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+
+.dtors
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+
+.jcr            0x0000000000624e00        0x8
+ *(.jcr)
+ .jcr           0x0000000000624e00        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+ .jcr           0x0000000000624e00        0x8 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+
+.data.rel.ro
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*)
+
+.dynamic        0x0000000000624e08      0x1f0
+ *(.dynamic)
+ .dynamic       0x0000000000624e08      0x1f0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x0000000000624e08                _DYNAMIC
+
+.got            0x0000000000624ff8        0x8
+ *(.got)
+ .got           0x0000000000624ff8        0x8 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ *(.igot)
+                0x0000000000625fe8                . = DATA_SEGMENT_RELRO_END (., (SIZEOF (.got.plt) >= 0x18)?0x18:0x0)
+
+.got.plt        0x0000000000625000      0x328
+ *(.got.plt)
+ .got.plt       0x0000000000625000      0x328 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x0000000000625000                _GLOBAL_OFFSET_TABLE_
+ *(.igot.plt)
+ .igot.plt      0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+
+.data           0x0000000000625340      0x348
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x0000000000625340        0x4 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x0000000000625340                data_start
+                0x0000000000625340                __data_start
+ .data          0x0000000000625344        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+ *fill*         0x0000000000625344        0x4 
+ .data          0x0000000000625348        0x8 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+                0x0000000000625348                __dso_handle
+ .data          0x0000000000625350        0x0 libs/lxdialog/checklist.o
+ .data          0x0000000000625350        0x0 libs/lxdialog/inputbox.o
+ .data          0x0000000000625350        0x0 libs/lxdialog/menubox.o
+ .data          0x0000000000625350        0x0 libs/lxdialog/textbox.o
+ .data          0x0000000000625350        0x0 libs/lxdialog/util.o
+ .data          0x0000000000625350        0x0 libs/lxdialog/yesno.o
+ .data          0x0000000000625350       0x10 frontends/mconf/mconf.o
+ .data          0x0000000000625360      0x328 libs/parser/yconf.o
+                0x0000000000625360                cdebug
+                0x0000000000625364                zconflineno
+                0x00000000006253a0                symbol_yes
+                0x0000000000625460                symbol_mod
+                0x0000000000625520                symbol_no
+                0x00000000006255e0                symbol_empty
+ .data          0x0000000000625688        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .data          0x0000000000625688        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+ .data          0x0000000000625688        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+ .data          0x0000000000625688        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+
+.tm_clone_table
+                0x0000000000625688        0x0
+ .tm_clone_table
+                0x0000000000625688        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+ .tm_clone_table
+                0x0000000000625688        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+
+.data1
+ *(.data1)
+                0x0000000000625688                _edata = .
+                0x0000000000625688                PROVIDE (edata, .)
+                0x0000000000625688                . = .
+                0x0000000000625688                __bss_start = .
+
+.bss            0x00000000006256a0    0x18418
+ *(.dynbss)
+ .dynbss        0x00000000006256a0      0x440 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+                0x00000000006256a0                stdout@@GLIBC_2.2.5
+                0x00000000006256c0                acs_map
+                0x0000000000625ac0                stdin@@GLIBC_2.2.5
+                0x0000000000625ad0                stdscr
+                0x0000000000625ad8                stderr@@GLIBC_2.2.5
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x0000000000625ae0        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
+ .bss           0x0000000000625ae0        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
+ .bss           0x0000000000625ae0        0x1 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+ *fill*         0x0000000000625ae1        0x3 
+ .bss           0x0000000000625ae4        0xc libs/lxdialog/checklist.o
+ .bss           0x0000000000625af0        0x0 libs/lxdialog/inputbox.o
+ .bss           0x0000000000625af0        0x8 libs/lxdialog/menubox.o
+ *fill*         0x0000000000625af8        0x8 
+ .bss           0x0000000000625b00      0x821 libs/lxdialog/textbox.o
+ *fill*         0x0000000000626321        0x3 
+ .bss           0x0000000000626324        0x4 libs/lxdialog/util.o
+ .bss           0x0000000000626328        0x0 libs/lxdialog/yesno.o
+ *fill*         0x0000000000626328       0x18 
+ .bss           0x0000000000626340     0x20e0 frontends/mconf/mconf.o
+ .bss           0x0000000000628420     0x11c2 libs/parser/yconf.o
+                0x0000000000628420                zconfin
+                0x0000000000628428                zconfout
+                0x0000000000628430                zconf_flex_debug
+ .bss           0x00000000006295e2        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .bss           0x00000000006295e2        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+ .bss           0x00000000006295e2        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+ .bss           0x00000000006295e2        0x0 /usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crtn.o
+ *(COMMON)
+ *fill*         0x00000000006295e2       0x1e 
+ COMMON         0x0000000000629600      0x801 libs/lxdialog/inputbox.o
+                0x0000000000629600                dialog_input_result
+ *fill*         0x0000000000629e01       0x1f 
+ COMMON         0x0000000000629e20      0x3ec libs/lxdialog/util.o
+                0x0000000000629e20                item_cur
+                0x0000000000629e28                saved_y
+                0x0000000000629e40                dlg
+                0x000000000062a108                item_head
+                0x000000000062a120                item_nil
+                0x000000000062a208                saved_x
+ *fill*         0x000000000062a20c       0x14 
+ COMMON         0x000000000062a220    0x13894 libs/parser/yconf.o
+                0x000000000062a220                zconfleng
+                0x000000000062a240                rootmenu
+                0x000000000062a2a0                modules_val
+                0x000000000062a2a4                zconfdebug
+                0x000000000062a2a8                current_file
+                0x000000000062a2b0                zconflval
+                0x000000000062a2b8                zconftext
+                0x000000000062a2c0                sym_defconfig_list
+                0x000000000062a2e0                symbol_hash
+                0x000000000063da88                sym_env_list
+                0x000000000063da90                zconfnerrs
+                0x000000000063da98                current_buf
+                0x000000000063daa0                modules_sym
+                0x000000000063daa8                file_list
+                0x000000000063dab0                zconfchar
+                0x000000000063dab8                . = ALIGN ((. != 0x0)?0x8:0x1)
+ *fill*         0x000000000063dab4        0x4 
+
+.lbss
+ *(.dynlbss)
+ *(.lbss .lbss.* .gnu.linkonce.lb.*)
+ *(LARGE_COMMON)
+                0x000000000063dab8                . = ALIGN (0x8)
+                0x000000000063dab8                . = SEGMENT_START ("ldata-segment", .)
+
+.lrodata
+ *(.lrodata .lrodata.* .gnu.linkonce.lr.*)
+
+.ldata          0x0000000000a3dab8        0x0
+ *(.ldata .ldata.* .gnu.linkonce.l.*)
+                0x0000000000a3dab8                . = ALIGN ((. != 0x0)?0x8:0x1)
+                0x0000000000a3dab8                . = ALIGN (0x8)
+                0x0000000000a3dab8                _end = .
+                0x0000000000a3dab8                PROVIDE (end, .)
+                0x0000000000a3dab8                . = DATA_SEGMENT_END (.)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x56
+ *(.comment)
+ .comment       0x0000000000000000       0x2b /usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
+                                         0x2c (松开之前的大小)
+ .comment       0x0000000000000000       0x2c libs/lxdialog/checklist.o
+ .comment       0x0000000000000000       0x2c libs/lxdialog/inputbox.o
+ .comment       0x0000000000000000       0x2c libs/lxdialog/menubox.o
+ .comment       0x0000000000000000       0x2c libs/lxdialog/textbox.o
+ .comment       0x0000000000000000       0x2c libs/lxdialog/util.o
+ .comment       0x0000000000000000       0x2c libs/lxdialog/yesno.o
+ .comment       0x0000000000000000       0x2c frontends/mconf/mconf.o
+ .comment       0x0000000000000000       0x2c libs/parser/yconf.o
+ .comment       0x000000000000002b       0x2b /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+                                         0x2c (松开之前的大小)
+ .comment       0x0000000000000000       0x2c /usr/lib/x86_64-linux-gnu/libc_nonshared.a(stat.oS)
+ .comment       0x0000000000000000       0x2c /usr/lib/gcc/x86_64-linux-gnu/4.8/crtend.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info .gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line .debug_line.* .debug_line_end)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_macro
+ *(.debug_macro)
+
+.gnu.attributes
+ *(.gnu.attributes)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(kconfig-mconf elf64-x86-64)
