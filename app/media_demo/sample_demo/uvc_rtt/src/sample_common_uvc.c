@@ -1,5 +1,8 @@
 #include "uvc_rtt/include/sample_common_uvc.h"
 #include "uvc_rtt/include/uvc_feature_config.h"
+#if UVC_ENABLE_SD_RECORD
+#include "uvc_rtt/include/uvc_sd_record.h"
+#endif
 #include "overlay/include/sample_common_overlay.h"
 #include "overlay/include/overlay_gbox.h"
 
@@ -1058,6 +1061,11 @@ FH_SINT32 sample_common_uvc_start(FH_VOID)
     ret = uvc_init(stream_probe_change);
     SDK_FUNC_ERROR_GOTO(model_name, ret);
 
+#if UVC_ENABLE_SD_RECORD
+    // 初始化 SD 卡录像模块
+    uvc_sd_record_init();
+#endif
+
     ret = init_dev_info(&g_uvc_dev[STREAM_ID1], STREAM_ID1);
     SDK_FUNC_ERROR_GOTO(model_name, ret);
 
@@ -1143,6 +1151,11 @@ FH_SINT32 sample_common_uvc_stop(FH_VOID)
     SDK_FUNC_ERROR(model_name, ret);
 #endif
 #endif
+
+#if UVC_ENABLE_SD_RECORD
+    uvc_sd_record_deinit();
+#endif
+
     return ret;
 }
 

@@ -137,8 +137,22 @@ SRCS += $(wildcard $(SAMPLE_DEMO_DIR)/stream/src/*.c)
 
 INCS += -I$(CHIP_DIR)/uvc/include
 ifeq ($(UVC_ENABLE), y)
-SRCS += $(wildcard $(CHIP_DIR)/uvc/src/*.c)
+SRCS += $(wildcard $(SAMPLE_COMMON_DIR)/$(CHIP_ID)/uvc/src/*.c)
 SRCS += $(wildcard $(SAMPLE_DEMO_DIR)/uvc_rtt/src/*.c)
+
+# librecord for SD card recording
+SRCS += $(wildcard $(ROOT)/../rpc_video_demo/librecord/src/*.c)
+INCS += -I$(ROOT)/../rpc_video_demo/librecord/include
+# uvc record container for AVI/MP4
+INCS += -I$(SAMPLE_DEMO_DIR)/uvc_rtt/include
+# dfs filesystem for SD card recording
+INCS += -I$(SDKROOT)/fs/include
+INCS += -I$(SDKROOT)/kernel/include
+INCS += -I$(SDKROOT)/kernel/include/ipc
+INCS += -I$(SDKROOT)/drivers/arch
+INCS += -I$(SDKROOT)/drivers/include
+INCS += -I$(SDKROOT)/out/rtconfig
+INCS += -I$(SDKROOT)/shell
 ifeq ($(USB_AUDIO_ENABLE), y)
 SRCS += $(wildcard components/libusb_rtt/usb_audio/src/*.c)
 endif

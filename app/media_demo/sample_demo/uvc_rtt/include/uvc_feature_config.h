@@ -44,4 +44,30 @@
  */
 #define UVC_ENABLE_GBOX           0
 
+/**
+ * @brief SD 卡录像功能配置
+ * @note 设置为 1 开启 SD 卡录像功能，设置为 0 关闭
+ *       录像文件保存在 SD 卡根目录，文件名格式: YYYYMMDD_HHMMSS.mp4
+ */
+#define UVC_ENABLE_SD_RECORD      1
+
+/**
+ * @brief SD 卡录像格式配置
+ * @note 0: 原始 H264/H265 流 (无封装)
+ *       1: AVI 封装格式
+ *       2: MP4 封装格式
+ *       3: 使用用户自定义库 (后续扩展)
+ */
+#define UVC_SD_RECORD_FORMAT     2
+
+/**
+ * @brief SD 卡挂载路径
+ */
+#define UVC_SD_MOUNT_PATH        "/mnt/sdcard"
+
+/**
+ * @brief 录像文件保存路径
+ */
+#define UVC_SD_RECORD_PATH       "/mnt/sdcard"
+
 #endif /* __UVC_FEATURE_CONFIG_H__ */

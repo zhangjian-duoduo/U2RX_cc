@@ -1,4 +1,8 @@
 #include "uvc_rtt_config.h"
+#include "uvc_rtt/include/uvc_feature_config.h"
+#if UVC_ENABLE_SD_RECORD
+#include "uvc_rtt/include/uvc_sd_record.h"
+#endif
 
 static char *model_name = MODEL_TAG_UVC_CONFIG;
 
@@ -265,6 +269,10 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
 
     SDK_CHECK_NULL_PTR(model_name, pDev);
 
+#if UVC_ENABLE_SD_RECORD
+    printf("[UVC] getENCStreamToUVC: grp=%d, chn=%d, streamType=%d\n", grp_id, chn_id, streamType);
+#endif
+
     enc_info = get_enc_config(grp_id, chn_id);
     enc_chn = enc_info->channel;
 
@@ -273,6 +281,9 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
 
     if (stream.stmtype == FH_STREAM_H264 && streamType == FH_STREAM_H264)
     {
+#if UVC_ENABLE_SD_RECORD
+        printf("[UVC] H264 frame: stmtype=%d, streamType=%d, len=%d\n", stream.stmtype, streamType, stream.h264_stream.length);
+#endif
         if (pDev->g_h264_delay > 1 && enc_chn == pDev->stream_id) // delay未实现 TODO
         {
             if (pDev->g_h264_delay == 5)
@@ -287,6 +298,13 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
 
         fh_uvc_stream_pts(pDev->stream_id, stream.h264_stream.time_stamp);
         fh_uvc_stream_enqueue(pDev->stream_id, stream.h264_stream.start, stream.h264_stream.length);
+
+#if UVC_ENABLE_SD_RECORD
+        // 保存 H264 帧到 SD 卡
+        uvc_sd_record_save_frame(pDev->stream_id, DMC_MEDIA_TYPE_H264,
+                                 stream.h264_stream.start, stream.h264_stream.length,
+                                 stream.h264_stream.nalu[0].type);
+#endif
     }
     else if (stream.stmtype == FH_STREAM_H265 && streamType == FH_STREAM_H265)
     {
@@ -302,6 +320,13 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
 
         fh_uvc_stream_pts(pDev->stream_id, stream.h265_stream.time_stamp);
         fh_uvc_stream_enqueue(pDev->stream_id, stream.h265_stream.start, stream.h265_stream.length);
+
+#if UVC_ENABLE_SD_RECORD
+        // 保存 H265 帧到 SD 卡
+        uvc_sd_record_save_frame(pDev->stream_id, DMC_MEDIA_TYPE_H265,
+                                 stream.h265_stream.start, stream.h265_stream.length,
+                                 stream.h265_stream.nalu[0].type);
+#endif
     }
 
     ret = enc_release_stream(&stream);
@@ -333,6 +358,12 @@ FH_SINT32 getMJPEGStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev
         {
             fh_uvc_stream_pts(pDev->stream_id, UVC_STILL_IMAGE_MAGIC_FLAG);
             fh_uvc_stream_enqueue(pDev->stream_id, stream.mjpeg_stream.start, stream.mjpeg_stream.length);
+
+#if UVC_ENABLE_SD_RECORD
+            // 保存 MJPEG 帧到 SD 卡
+            uvc_sd_record_save_frame(pDev->stream_id, DMC_MEDIA_TYPE_MJPEG,
+                                     stream.mjpeg_stream.start, stream.mjpeg_stream.length, 1);
+#endif
         }
         else
         {
@@ -347,6 +378,12 @@ FH_SINT32 getMJPEGStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev
 
             fh_uvc_stream_pts(pDev->stream_id, stream.mjpeg_stream.time_stamp);
             fh_uvc_stream_enqueue(pDev->stream_id, stream.mjpeg_stream.start, stream.mjpeg_stream.length);
+
+#if UVC_ENABLE_SD_RECORD
+            // 保存 MJPEG 帧到 SD 卡
+            uvc_sd_record_save_frame(pDev->stream_id, DMC_MEDIA_TYPE_MJPEG,
+                                     stream.mjpeg_stream.start, stream.mjpeg_stream.length, 1);
+#endif
         }
     }
     else

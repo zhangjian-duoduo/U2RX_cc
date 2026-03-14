@@ -9,6 +9,10 @@
 #include "isp/isp_sensor_if.h"
 #include "dsp_ext/FHAdv_Isp_mpi_v3.h"
 #include "libusb_rtt/usb_video/include/uvc_callback.h"
+#include "uvc_rtt/include/uvc_feature_config.h"
+#if UVC_ENABLE_SD_RECORD
+#include "uvc_rtt/include/uvc_sd_record.h"
+#endif
 
 #define SENSOR_SLEEP_DELAY_S 20
 
@@ -39,6 +43,15 @@ FH_VOID uvc_stream_on(FH_SINT32 stream_id)
     set_isp_sleep(FH_APP_GRP_ID, 0);
     pthread_mutex_unlock(&g_mutex_sensor);
     printf("%s:stream_id %d\n", __func__, stream_id);
+
+#if UVC_ENABLE_SD_RECORD
+    // AMCAP 开启视频流时开始录像
+    if (stream_id == STREAM_ID1)
+    {
+        uvc_sd_record_start();
+    }
+#endif
+
 #ifdef UVC_WINDOWS_HELLO_FACE
     if (stream_id == STREAM_ID2)
         ir_stream_on = 1;
@@ -48,6 +61,15 @@ FH_VOID uvc_stream_on(FH_SINT32 stream_id)
 FH_VOID uvc_stream_off(FH_SINT32 stream_id)
 {
     g_uspara_change++;
+
+#if UVC_ENABLE_SD_RECORD
+    // AMCAP 关闭视频流时停止录像
+    if (stream_id == STREAM_ID1)
+    {
+        uvc_sd_record_stop();
+    }
+#endif
+
 #ifdef UVC_WINDOWS_HELLO_FACE
     if (stream_id == STREAM_ID2)
         ir_stream_on = 0;
