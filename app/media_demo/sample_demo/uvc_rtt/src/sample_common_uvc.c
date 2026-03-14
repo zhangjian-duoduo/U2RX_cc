@@ -1,5 +1,7 @@
 #include "uvc_rtt/include/sample_common_uvc.h"
+#include "uvc_rtt/include/uvc_feature_config.h"
 #include "overlay/include/sample_common_overlay.h"
+#include "overlay/include/overlay_gbox.h"
 
 static char *model_name = MODEL_TAG_DEMO_UVC;
 
@@ -9,6 +11,10 @@ static pthread_t g_thread_video_stream[2];
 static pthread_t g_thread_yuv[2];
 #endif
 static FH_SINT32 g_uvc_th_status = 0;
+
+#if UVC_ENABLE_CROSSHAIR
+static FH_VOID update_crosshair(FH_SINT32 width, FH_SINT32 height);
+#endif
 
 #ifdef FH_APP_OPEN_VISE
 #ifdef FH_APP_VISE_PIP
@@ -820,6 +826,12 @@ FH_VOID stream_probe_change(FH_SINT32 stream_id, UVC_FORMAT fmt, FH_SINT32 width
     ret = sample_fh_overlay_start(grp_id);
     SDK_FUNC_ERROR_GOTO(model_name, ret);
 #endif
+
+#if UVC_ENABLE_CROSSHAIR
+    // 分辨率切换时更新十字线位置
+    update_crosshair(width, height);
+#endif
+
 Exit:
     return;
 }
@@ -1100,6 +1112,17 @@ FH_SINT32 sample_common_uvc_start(FH_VOID)
     ret = hid_demo();
 #endif
 
+#if UVC_ENABLE_CROSSHAIR
+    // 初始化十字线，使用默认分辨率
+    {
+        FH_SINT32 width = g_uvc_dev[STREAM_ID1].width;
+        FH_SINT32 height = g_uvc_dev[STREAM_ID1].height;
+        if (width <= 0) width = 1920;
+        if (height <= 0) height = 1080;
+        update_crosshair(width, height);
+    }
+#endif
+
     return ret;
 
 Exit:
@@ -1122,3 +1145,52 @@ FH_SINT32 sample_common_uvc_stop(FH_VOID)
 #endif
     return ret;
 }
+
+#if UVC_ENABLE_CROSSHAIR
+/**
+ * @brief 更新十字线位置（基于当前实际分辨率）
+ */
+static FH_VOID update_crosshair(FH_SINT32 width, FH_SINT32 height)
+{
+    FH_SINT32 grp_id = 0;
+    FH_SINT32 chn_id = 0;
+    FH_SINT32 line_width = UVC_CROSSHAIR_LINE_WIDTH;
+    OSD_GBOX gbox_cross[2];
+
+    if (width <= 0 || height <= 0)
+    {
+        SDK_PRT(model_name, "Invalid crosshair resolution: %dx%d\n", width, height);
+        return;
+    }
+
+    // 水平线: 从左到右，垂直居中
+    gbox_cross[0].enable = 1;
+    gbox_cross[0].gbox_id = 2;
+    gbox_cross[0].x = 0;
+    gbox_cross[0].y = (height - line_width) / 2;
+    gbox_cross[0].w = width;
+    gbox_cross[0].h = line_width;
+    gbox_cross[0].color.fRed = UVC_CROSSHAIR_COLOR_R;
+    gbox_cross[0].color.fGreen = UVC_CROSSHAIR_COLOR_G;
+    gbox_cross[0].color.fBlue = UVC_CROSSHAIR_COLOR_B;
+    gbox_cross[0].color.fAlpha = UVC_CROSSHAIR_COLOR_A;
+
+    // 垂直线: 从上到下，水平居中
+    gbox_cross[1].enable = 1;
+    gbox_cross[1].gbox_id = 3;
+    gbox_cross[1].x = (width - line_width) / 2;
+    gbox_cross[1].y = 0;
+    gbox_cross[1].w = line_width;
+    gbox_cross[1].h = height;
+    gbox_cross[1].color.fRed = UVC_CROSSHAIR_COLOR_R;
+    gbox_cross[1].color.fGreen = UVC_CROSSHAIR_COLOR_G;
+    gbox_cross[1].color.fBlue = UVC_CROSSHAIR_COLOR_B;
+    gbox_cross[1].color.fAlpha = UVC_CROSSHAIR_COLOR_A;
+
+    // 设置两条线
+    sample_set_gbox(grp_id, chn_id, &gbox_cross[0]);
+    sample_set_gbox(grp_id, chn_id, &gbox_cross[1]);
+
+    SDK_PRT(model_name, "Crosshair updated: %dx%d\n", width, height);
+}
+#endif

@@ -1,0 +1,10 @@
+#ifndef __APP_CONFIG_H__
+#define __APP_CONFIG_H__
+
+#define RT_USING_VFP
+#define CONFIG_ARCH_FULLHAN
+#define CONFIG_ARCH_FH8626V300
+#define CONFIG_CHIP_FH8626V300
+#define CONFIG_BOARD_APP
+
+#endif

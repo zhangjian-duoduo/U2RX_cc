@@ -13,6 +13,8 @@ void user_main(void)
         printf("fh_nna_module_init failed %x !\n", ret);
     }
 #endif
+_vlcview("1.1.1.1", 1234);
+
 }
 
 FH_VOID vlcview_exit(FH_VOID)
