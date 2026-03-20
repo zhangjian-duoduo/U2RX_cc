@@ -25,6 +25,17 @@ typedef enum {
 } record_container_type_t;
 
 /**
+ * @brief 帧索引条目
+ */
+typedef struct {
+    unsigned int offset;           /* 帧数据偏移 */
+    unsigned int size;              /* 帧大小 */
+    unsigned int is_keyframe;      /* 是否关键帧 */
+} frame_index_entry_t;
+
+#define MAX_FRAME_INDEX 3000       /* 最大帧索引数 */
+
+/**
  * @brief 录像上下文
  */
 typedef struct {
@@ -39,6 +50,11 @@ typedef struct {
     unsigned int data_size;         /* 数据大小 */
     int is_keyframe;                /* 是否是关键帧 */
     pthread_mutex_t mutex;         /* 互斥锁 */
+    /* 帧索引 */
+    frame_index_entry_t frame_index[MAX_FRAME_INDEX];
+    unsigned int index_count;
+    unsigned int movi_offset;      /* movi数据起始偏移 */
+    unsigned int header_size;      /* 头部大小 */
 } record_context_t;
 
 /**

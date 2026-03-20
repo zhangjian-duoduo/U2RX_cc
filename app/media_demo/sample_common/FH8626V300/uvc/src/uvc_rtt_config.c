@@ -270,7 +270,7 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
     SDK_CHECK_NULL_PTR(model_name, pDev);
 
 #if UVC_ENABLE_SD_RECORD
-    printf("[UVC] getENCStreamToUVC: grp=%d, chn=%d, streamType=%d\n", grp_id, chn_id, streamType);
+    //printf("[UVC] getENCStreamToUVC: grp=%d, chn=%d, streamType=%d\n", grp_id, chn_id, streamType);
 #endif
 
     enc_info = get_enc_config(grp_id, chn_id);
@@ -282,7 +282,7 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
     if (stream.stmtype == FH_STREAM_H264 && streamType == FH_STREAM_H264)
     {
 #if UVC_ENABLE_SD_RECORD
-        printf("[UVC] H264 frame: stmtype=%d, streamType=%d, len=%d\n", stream.stmtype, streamType, stream.h264_stream.length);
+        //printf("[UVC] H264 frame: stmtype=%d, streamType=%d, len=%d\n", stream.stmtype, streamType, stream.h264_stream.length);
 #endif
         if (pDev->g_h264_delay > 1 && enc_chn == pDev->stream_id) // delay未实现 TODO
         {
@@ -301,9 +301,12 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
 
 #if UVC_ENABLE_SD_RECORD
         // 保存 H264 帧到 SD 卡
+        // SPS(7), PPS(8), IDR(5) 视为关键帧，因为解码需要这些数据
+        int nalu_type = stream.h264_stream.nalu[0].type;
+        int is_keyframe = (nalu_type == 7 || nalu_type == 8 || nalu_type == 5) ? 1 : 0;
         uvc_sd_record_save_frame(pDev->stream_id, DMC_MEDIA_TYPE_H264,
                                  stream.h264_stream.start, stream.h264_stream.length,
-                                 stream.h264_stream.nalu[0].type);
+                                 is_keyframe);
 #endif
     }
     else if (stream.stmtype == FH_STREAM_H265 && streamType == FH_STREAM_H265)
@@ -323,9 +326,12 @@ FH_SINT32 getENCStreamToUVC(FH_SINT32 grp_id, FH_SINT32 chn_id, struct uvc_dev_a
 
 #if UVC_ENABLE_SD_RECORD
         // 保存 H265 帧到 SD 卡
+        // VPS(32), SPS(33), PPS(34), IDR(19) 视为关键帧
+        int nalu_type_h265 = stream.h265_stream.nalu[0].type;
+        int is_keyframe_h265 = ((nalu_type_h265 >= 32 && nalu_type_h265 <= 34) || nalu_type_h265 == 19) ? 1 : 0;
         uvc_sd_record_save_frame(pDev->stream_id, DMC_MEDIA_TYPE_H265,
                                  stream.h265_stream.start, stream.h265_stream.length,
-                                 stream.h265_stream.nalu[0].type);
+                                 is_keyframe_h265);
 #endif
     }
 

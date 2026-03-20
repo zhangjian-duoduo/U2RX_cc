@@ -748,7 +748,7 @@ void fh_uvc_init(int stream_id, struct uvc_format_info *fmt, int fmt_num)
         rt_thread_startup(g_uvc_driver_thread[stream_id]);
 
         g_thread_uvc_event = rt_thread_create("uvc_control_event", uvc_event_proc,
-                   NULL, 4 * 1024, 8, 1);
+                   NULL, 8 * 1024, 8, 1);
         rt_thread_startup(g_thread_uvc_event);
         uvc_uspara_load();
     }

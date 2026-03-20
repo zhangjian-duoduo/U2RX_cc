@@ -835,6 +835,11 @@ FH_VOID stream_probe_change(FH_SINT32 stream_id, UVC_FORMAT fmt, FH_SINT32 width
     update_crosshair(width, height);
 #endif
 
+#if UVC_ENABLE_SD_RECORD
+    // 分辨率切换时更新录像参数
+    uvc_sd_record_set_video_params(width, height, fps);
+#endif
+
 Exit:
     return;
 }

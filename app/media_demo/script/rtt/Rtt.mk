@@ -22,7 +22,7 @@ ifeq ($(DEBUG),1)
 CFLAGS += -g
 endif
 
-LIBS = -ldbi_rtt -lm -ladvapi_osd -ladvapi_isp -ladvapi_smartir -ladvapi_md -ladvapi
+LIBS = -ldbi_rtt -lm -ladvapi_osd -ladvapi_isp -ladvapi_smartir -ladvapi_md -ladvapi -lfhavi
 
 #sample_demo start
 SRCS = $(wildcard startup/demo_entry_rtt.c)
@@ -145,6 +145,8 @@ SRCS += $(wildcard $(ROOT)/../rpc_video_demo/librecord/src/*.c)
 INCS += -I$(ROOT)/../rpc_video_demo/librecord/include
 # uvc record container for AVI/MP4
 INCS += -I$(SAMPLE_DEMO_DIR)/uvc_rtt/include
+# libdmc include
+INCS += -I$(ROOT)/components/libdmc/include
 # dfs filesystem for SD card recording
 INCS += -I$(SDKROOT)/fs/include
 INCS += -I$(SDKROOT)/kernel/include

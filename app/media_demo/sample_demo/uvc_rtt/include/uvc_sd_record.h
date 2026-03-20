@@ -17,10 +17,6 @@
 
 #if UVC_ENABLE_SD_RECORD
 
-#if UVC_SD_RECORD_FORMAT == 0
-#include "librecord.h"
-#endif
-
 /**
  * @brief 初始化 SD 卡录像模块
  * @return 0 成功, -1 失败
@@ -34,6 +30,21 @@ int uvc_sd_record_init(void);
  * @param fps 帧率
  */
 void uvc_sd_record_set_video_params(int width, int height, int fps);
+
+/**
+ * @brief 设置视频编码类型 (需要在开始录像前调用, 仅第三方AVI库有效)
+ * @param type 0: H264, 1: H265
+ */
+void uvc_sd_record_set_video_type(int type);
+
+/**
+ * @brief 设置 H264/H265 SPS/PPS 数据 (需要在开始录像前调用, 仅第三方AVI库有效)
+ * @param sps SPS数据指针
+ * @param sps_len SPS数据长度
+ * @param pps PPS数据指针
+ * @param pps_len PPS数据长度
+ */
+void uvc_sd_record_set_sps_pps(unsigned char *sps, int sps_len, unsigned char *pps, int pps_len);
 
 /**
  * @brief 开始录像

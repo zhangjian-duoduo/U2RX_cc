@@ -112,7 +112,7 @@ static record_context_t* avi_container_init(const char *filename,
 
     /* hdrl LIST */
     write_uint32(avi_header + offset, AVI_FOURCC_LIST); offset += 4;
-    write_uint32(avi_header + offset, 0); offset += 4;  /* hdrl size */
+    write_uint32(avi_header + offset, 192); offset += 4;  /* hdrl size: avih(60) + strl(132) = 192 */
     write_uint32(avi_header + offset, AVI_FOURCC_hdrl); offset += 4;  /* "hdrl" */
 
     /* avih chunk */
@@ -120,28 +120,27 @@ static record_context_t* avi_container_init(const char *filename,
     write_uint32(avi_header + offset, 56); offset += 4;  /* chunk size */
     unsigned int microsec_per_frame = 1000000 / fps;
     write_uint32(avi_header + offset, microsec_per_frame); offset += 4;  /* dwMicroSecPerFrame */
-    write_uint32(avi_header + offset, width * height * fps * 2); offset += 4;  /* dwMaxBytesPerSec */
+    write_uint32(avi_header + offset, 0); offset += 4;  /* dwMaxBytesPerSec (与第三方库一致,设为0) */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwPaddingGranularity */
-    write_uint32(avi_header + offset, 0); offset += 4;  /* dwFlags */
+    write_uint32(avi_header + offset, 0x00000010); offset += 4;  /* dwFlags: AVIF_HASINDEX */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwTotalFrames */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwInitialFrames */
     write_uint32(avi_header + offset, 1); offset += 4;  /* dwStreams */
-    write_uint32(avi_header + offset, width * height * 3); offset += 4;  /* dwSuggestedBufferSize */
+    write_uint32(avi_header + offset, 4096); offset += 4;  /* dwSuggestedBufferSize: 4KB */
     write_uint32(avi_header + offset, width); offset += 4;  /* dwWidth */
     write_uint32(avi_header + offset, height); offset += 4;  /* dwHeight */
-    write_uint32(avi_header + offset, 0); offset += 4;  /* dwReserved */
-    write_uint32(avi_header + offset, 0); offset += 4;
-    write_uint32(avi_header + offset, 0); offset += 4;
-    write_uint32(avi_header + offset, 0); offset += 4;
+    write_uint32(avi_header + offset, 0); offset += 4;  /* dwReserved[0] */
+    write_uint32(avi_header + offset, 0); offset += 4;  /* dwReserved[1] */
+    write_uint32(avi_header + offset, 0); offset += 4;  /* dwReserved[2] */
 
     /* strl LIST */
     write_uint32(avi_header + offset, AVI_FOURCC_LIST); offset += 4;
-    write_uint32(avi_header + offset, 116); offset += 4;  /* strl size */
+    write_uint32(avi_header + offset, 116); offset += 4;  /* strl size: strh(60) + strf(56) = 116 */
     write_uint32(avi_header + offset, AVI_FOURCC_strl); offset += 4;  /* "strl" */
 
     /* strh chunk */
     write_uint32(avi_header + offset, AVI_FOURCC_strh); offset += 4;
-    write_uint32(avi_header + offset, 64); offset += 4;  /* chunk size */
+    write_uint32(avi_header + offset, 56); offset += 4;  /* chunk size: 56 bytes (与第三方库一致) */
     write_uint32(avi_header + offset, 0x73646976); offset += 4;  /* "vids" */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwCodec */
     write_uint16(avi_header + offset, 0); offset += 2;  /* wFlags */
@@ -152,7 +151,7 @@ static record_context_t* avi_container_init(const char *filename,
     write_uint32(avi_header + offset, fps); offset += 4;  /* dwRate */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwStart */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwLength */
-    write_uint32(avi_header + offset, width * height * fps); offset += 4;  /* dwSuggestedBufferSize */
+    write_uint32(avi_header + offset, 0x100000); offset += 4;  /* dwSuggestedBufferSize: 1MB */
     write_uint32(avi_header + offset, 0xFFFFFFFF); offset += 4;  /* dwQuality */
     write_uint32(avi_header + offset, 0); offset += 4;  /* dwSampleSize */
     write_uint16(avi_header + offset, 0); offset += 2;  /* rcFrame.left */
@@ -160,15 +159,36 @@ static record_context_t* avi_container_init(const char *filename,
     write_uint16(avi_header + offset, width); offset += 2;  /* rcFrame.right */
     write_uint16(avi_header + offset, height); offset += 2;  /* rcFrame.bottom */
 
-    /* strf chunk (BITMAPINFOHEADER) */
+    /* strf chunk - BITMAPINFOHEADER */
+    unsigned int strf_size = 40;  /* BITMAPINFOHEADER size */
+    unsigned int fourcc;
+    unsigned int bitcount;
+
+    /* 根据视频类型设置 FourCC 和位深 */
+    if (video_type == 0) {
+        /* H264 */
+        fourcc = 0x34363248;  /* 'H264' */
+        bitcount = 24;
+    } else if (video_type == 1) {
+        /* H265 */
+        fourcc = 0x35363248;  /* 'H265' */
+        bitcount = 24;
+    } else {
+        /* MJPEG 或其他 */
+        fourcc = 0x47504A4D;  /* 'MJPG' */
+        bitcount = 24;
+    }
+
     write_uint32(avi_header + offset, AVI_FOURCC_strf); offset += 4;
-    write_uint32(avi_header + offset, 40); offset += 4;  /* chunk size */
+    write_uint32(avi_header + offset, strf_size); offset += 4;  /* chunk size */
+
+    /* BITMAPINFOHEADER 部分 */
     write_uint32(avi_header + offset, 40); offset += 4;  /* biSize */
     write_uint32(avi_header + offset, width); offset += 4;  /* biWidth */
     write_uint32(avi_header + offset, height); offset += 4;  /* biHeight */
     write_uint16(avi_header + offset, 1); offset += 2;  /* biPlanes */
-    write_uint16(avi_header + offset, 24); offset += 2;  /* biBitCount */
-    write_uint32(avi_header + offset, 0); offset += 4;  /* biCompression - H264 使用自定义解码器 */
+    write_uint16(avi_header + offset, bitcount); offset += 2;  /* biBitCount */
+    write_uint32(avi_header + offset, fourcc); offset += 4;  /* biCompression */
     write_uint32(avi_header + offset, width * height * 3); offset += 4;  /* biSizeImage */
     write_uint32(avi_header + offset, 0); offset += 4;  /* biXPelsPerMeter */
     write_uint32(avi_header + offset, 0); offset += 4;  /* biYPelsPerMeter */
@@ -180,10 +200,37 @@ static record_context_t* avi_container_init(const char *filename,
     write_uint32(avi_header + offset, 0); offset += 4;  /* movi size */
     write_uint32(avi_header + offset, AVI_FOURCC_movi); offset += 4;  /* "movi" */
 
+    /* 保存movi size字段的偏移位置 */
+    ctx->movi_offset = offset - 4;  /* 指向movi size的位置 */
+
+    /* 保存头部大小 */
+    ctx->header_size = offset;
+
     /* 写入头部 */
     write(ctx->fd, avi_header, offset);
 
+    const char *type_str;
+    unsigned int fourcc_val;
+    if (video_type == 0) {
+        type_str = "H264";
+        fourcc_val = 0x34363248;
+    } else if (video_type == 1) {
+        type_str = "H265";
+        fourcc_val = 0x35363248;
+    } else {
+        type_str = "MJPEG";
+        fourcc_val = 0x47504A4D;
+    }
+
+    printf("[Record] ================================================\n");
     printf("[Record] AVI container initialized: %s\n", filename);
+    printf("[Record] Resolution: %dx%d, FPS: %d, VideoType: %s\n",
+           width, height, fps, type_str);
+    printf("[Record] Header size: %d bytes\n", offset);
+    printf("[Record] movi LIST offset: %d (size field at offset %d)\n", offset, ctx->movi_offset);
+    printf("[Record] AVI FourCC: '%s' (0x%08X)\n", type_str, fourcc_val);
+    printf("[Record] Format: Raw %s with start code\n", type_str);
+    printf("[Record] ================================================\n");
 
     return ctx;
 }
@@ -197,10 +244,81 @@ static int avi_container_write_frame(record_context_t *ctx, const unsigned char 
 
     pthread_mutex_lock(&ctx->mutex);
 
-    /* 构建 AVI chunk */
-    unsigned char chunk[16];
-    int chunk_size = 8 + len;  /* chunk header + data */
-    chunk_size = (chunk_size + 1) & ~1;  /* 2字节对齐 */
+    /* 获取当前文件偏移（在写帧之前） */
+    off_t current_offset = lseek(ctx->fd, 0, SEEK_CUR);
+
+    /* 打印前几个字节用于调试 */
+    printf("[Record] ====== FRAME WRITE ======\n");
+    printf("[Record] Frame#%d: len=%d, offset=%d, keyframe=%d\n",
+           ctx->frame_count, len, (int)current_offset, is_keyframe);
+    if (len >= 4) {
+        printf("[Record] First 4 bytes: %02X %02X %02X %02X\n",
+               data[0], data[1], data[2], data[3]);
+    }
+
+    /* 检测并转换 H264 格式：AVCC (4字节长度前缀) -> Start Code (0x00000001) */
+    /* 注意：MJPEG 不需要这种转换 */
+    unsigned char *output_data = (unsigned char *)data;
+    int output_len = len;
+
+    /* 只有 H264(0) 和 H265(1) 需要 AVCC 转换，MJPEG 不需要 */
+    if (ctx->video_type != 2) {
+        /* 检查是否是 AVCC 格式：前4字节不是 start code (0x00000001 或 0x000001) */
+        if (!(data[0] == 0x00 && data[1] == 0x00 &&
+              ((data[2] == 0x00 && data[3] == 0x01) || data[2] == 0x00))) {
+            /* 可能是 AVCC 格式，检查第一个 NALU 长度是否合理 */
+            unsigned int nalu_len = ((unsigned int)data[0] << 24) |
+                                    ((unsigned int)data[1] << 16) |
+                                    ((unsigned int)data[2] << 8) |
+                                    (unsigned int)data[3];
+            if (nalu_len > 0 && nalu_len <= (unsigned int)(len - 4)) {
+                /* 是 AVCC 格式，需要转换 */
+                printf("[Record] Converting AVCC -> Start Code (first NALU len=%u)\n", nalu_len);
+
+                /* 分配缓冲区进行转换 */
+                static unsigned char conv_buffer[200000];
+                int conv_len = 0;
+                const unsigned char *ptr = data;
+                int remaining = len;
+
+                while (remaining > 4) {
+                    unsigned int nal_len = ((unsigned int)ptr[0] << 24) |
+                                            ((unsigned int)ptr[1] << 16) |
+                                            ((unsigned int)ptr[2] << 8) |
+                                            (unsigned int)ptr[3];
+                    if (nal_len == 0 || nal_len > (unsigned int)(remaining - 4)) {
+                        break;
+                    }
+                    /* 添加 start code */
+                    conv_buffer[conv_len++] = 0x00;
+                    conv_buffer[conv_len++] = 0x00;
+                    conv_buffer[conv_len++] = 0x00;
+                    conv_buffer[conv_len++] = 0x01;
+                    /* 复制 NALU 数据 */
+                    memcpy(conv_buffer + conv_len, ptr + 4, nal_len);
+                    conv_len += nal_len;
+                    /* 移动到下一个 NALU */
+                    ptr += 4 + nal_len;
+                    remaining -= 4 + nal_len;
+                }
+
+                output_data = conv_buffer;
+                output_len = conv_len;
+            }
+        }
+    }
+
+    /* 记录帧索引 - 直接使用原始长度 */
+    unsigned int actual_chunk_size = output_len;
+    if (ctx->index_count < MAX_FRAME_INDEX) {
+        ctx->frame_index[ctx->index_count].offset = current_offset;
+        ctx->frame_index[ctx->index_count].size = actual_chunk_size;
+        ctx->frame_index[ctx->index_count].is_keyframe = is_keyframe;
+        ctx->index_count++;
+    }
+
+    /* 构建 AVI chunk - 直接写入原始数据 */
+    unsigned char chunk[8];
 
     /* chunk type: 00dc (压缩视频) 或 00db (未压缩) */
     if (is_keyframe) {
@@ -208,16 +326,27 @@ static int avi_container_write_frame(record_context_t *ctx, const unsigned char 
     } else {
         write_uint32(chunk, 0x62643030);  /* 00db - P帧 */
     }
-    write_uint32(chunk + 4, len);  /* chunk size */
+
+    /* chunk size = 原始数据长度 */
+    write_uint32(chunk + 4, output_len);
     write(ctx->fd, chunk, 8);
-    write(ctx->fd, data, len);
-    if (len & 1) {
+
+    /* 直接写入原始 H264 数据（带 start code） */
+    write(ctx->fd, output_data, output_len);
+    if (output_len & 1) {
         char pad = 0;
         write(ctx->fd, &pad, 1);  /* 填充字节 */
     }
 
     ctx->frame_count++;
-    ctx->data_size += len;
+    ctx->data_size += output_len;
+
+    /* 打印写入结果 */
+    off_t new_offset = lseek(ctx->fd, 0, SEEK_CUR);
+    printf("[Record] Written: chunk_header(8) + raw_data(%d) = %d bytes\n",
+           output_len, (int)(new_offset - current_offset));
+    printf("[Record] Total frames: %d, Total data: %d bytes\n", ctx->frame_count, ctx->data_size);
+    printf("[Record] ====== FRAME WRITE END ======\n");
 
     pthread_mutex_unlock(&ctx->mutex);
 
@@ -233,55 +362,125 @@ static void avi_container_close(record_context_t *ctx)
 
     pthread_mutex_lock(&ctx->mutex);
 
-    /* 更新 AVI 头中的帧数和文件大小 */
-    lseek(ctx->fd, 0, SEEK_SET);
+    /* 计算 movi 数据起始偏移 - header_size 是 "movi" 之后的第一个字节位置 */
+    unsigned int movi_data_start = ctx->header_size;  /* 视频数据实际起始位置 */
+    unsigned int movi_size_offset = ctx->movi_offset;  /* movi size字段的位置 */
 
-    unsigned char avi_header[256];
-    memset(avi_header, 0, sizeof(avi_header));
+    printf("[Record] ========== AVI CLOSE START ==========\n");
+    printf("[Record] movi_data_start=%u, movi_size_offset=%u\n", movi_data_start, movi_size_offset);
+    printf("[Record] Total frames written: %u\n", ctx->frame_count);
 
-    int offset = 0;
-    write_uint32(avi_header + offset, AVI_FOURCC_RIFF); offset += 4;
-    unsigned int file_size = 4 + 4 + 4 + 4 + 56 + 4 + 4 + 4 + 116 + 4 + 4 + 64 + 40 + 4 + 4 + 4 + 4 + 8 + 8 + ctx->data_size + 4 + 4 + 4 + 4;
-    write_uint32(avi_header + offset, file_size - 8); offset += 4;
-    write_uint32(avi_header + offset, AVI_FOURCC_AVI); offset += 4;
+    /* 写入 idx1 索引块 - 追加到文件末尾 */
+    unsigned int idx_data_size = 16 * ctx->index_count;
+    unsigned int idx1_size = 8 + idx_data_size;
+    printf("[Record] Writing idx1: idx_data_size=%u, total_idx1_size=%u\n", idx_data_size, idx1_size);
+    unsigned char idx_header[8];
+    write_uint32(idx_header, AVI_FOURCC_idx1);  /* "idx1" */
+    write_uint32(idx_header + 4, idx_data_size);  /* 索引大小 */
+    write(ctx->fd, idx_header, 8);
 
-    /* 更新 hdrl LIST 大小 */
-    write_uint32(avi_header + offset, AVI_FOURCC_LIST); offset += 4;
-    write_uint32(avi_header + offset, 4 + 56 + 4 + 4 + 116); offset += 4;
-    write_uint32(avi_header + offset, AVI_FOURCC_hdrl); offset += 4;
-
-    /* 更新 avih chunk */
-    write_uint32(avi_header + offset, AVI_FOURCC_avih); offset += 4;
-    write_uint32(avi_header + offset, 56); offset += 4;
-    unsigned int microsec_per_frame = 1000000 / ctx->fps;
-    write_uint32(avi_header + offset, microsec_per_frame); offset += 4;
-
-    lseek(ctx->fd, 0, SEEK_SET);
-    read(ctx->fd, avi_header, 256);
-
-    /* 回到文件开头更新 */
-    lseek(ctx->fd, 0, SEEK_SET);
-
-    /* 查找并更新帧数位置 */
-    unsigned char *p = avi_header;
-    while (p < avi_header + 200) {
-        if (*(unsigned int*)p == AVI_FOURCC_avih) {
-            p += 8;
-            write_uint32(p, ctx->frame_count);  /* dwTotalFrames */
-            break;
+    /* 写入每帧的索引 - 标准AVI索引格式 */
+    printf("[Record] Writing index entries (relative to movi start @ offset %u):\n", movi_data_start);
+    for (unsigned int i = 0; i < ctx->index_count; i++) {
+        unsigned char entry[16];
+        /* chunk ID: 00dc 或 00db */
+        if (ctx->frame_index[i].is_keyframe) {
+            write_uint32(entry, AVI_FOURCC_00dc);  /* "00dc" */
+        } else {
+            write_uint32(entry, 0x62643030);  /* "00db" */
         }
-        p++;
+        /* 关键帧标志: AVIIF_KEYFRAME = 0x00000010 */
+        unsigned int flags = ctx->frame_index[i].is_keyframe ? 0x00000010 : 0;
+        write_uint32(entry + 4, flags);  /* 关键帧标志 */
+        /* offset 应该是相对于 movi 数据起始位置的偏移 */
+        unsigned int relative_offset = ctx->frame_index[i].offset - movi_data_start;
+        write_uint32(entry + 8, relative_offset);  /* 相对偏移 */
+        write_uint32(entry + 12, ctx->frame_index[i].size);  /* 大小 */
+        write(ctx->fd, entry, 16);
+
+        /* 打印每条索引 */
+        if (i < 5 || i == ctx->index_count - 1) {
+            printf("[Record]   Index[%u]: chunk=%s, rel_offset=%u, size=%u\n",
+                   i,
+                   ctx->frame_index[i].is_keyframe ? "00dc" : "00db",
+                   relative_offset,
+                   ctx->frame_index[i].size);
+        } else if (i == 5) {
+            printf("[Record]   ... (total %u entries)\n", ctx->index_count);
+        }
     }
 
-    write(ctx->fd, avi_header, 192);
+    /* 获取最终文件大小（包含idx1） */
+    lseek(ctx->fd, 0, SEEK_END);
+    unsigned int final_file_size = lseek(ctx->fd, 0, SEEK_CUR);
+
+    /* 计算正确的 movi LIST 大小 */
+    /* movi LIST 包含: "movi"(4字节) + 所有帧数据 */
+    /* movi_size = final_file_size - movi_data_start - idx1_chunk_size */
+    /* 其中 idx1_chunk_size = 8 + idx_data_size */
+    unsigned int movi_size = final_file_size - movi_data_start - 8 - idx_data_size;
+    printf("[Record] Size calculation:\n");
+    printf("[Record]   final_file_size = %u\n", final_file_size);
+    printf("[Record]   - movi_data_start = %u\n", movi_data_start);
+    printf("[Record]   - idx1_chunk(8+idx_data_size=%u) = %u\n", idx_data_size, 8 + idx_data_size);
+    printf("[Record]   = movi_size = %u\n", movi_size);
+    printf("[Record] Frames: %u, Data size: %u bytes\n", ctx->frame_count, ctx->data_size);
+
+    /* 更新 hdrl LIST 大小 - 与第三方库保持一致: 294 - 102 = 192 */
+    unsigned int hdrl_size = 192;
+    printf("[Record] Update hdrl size at offset 12: %u\n", hdrl_size);
+    lseek(ctx->fd, 12, SEEK_SET);
+    unsigned char hdrl_buf[4];
+    write_uint32(hdrl_buf, hdrl_size);
+    write(ctx->fd, hdrl_buf, 4);
+
+    /* 更新 RIFF 大小 */
+    printf("[Record] Update RIFF size at offset 4: %u\n", final_file_size - 8);
+    lseek(ctx->fd, 4, SEEK_SET);
+    unsigned char riff_buf[4];
+    write_uint32(riff_buf, final_file_size - 8);
+    write(ctx->fd, riff_buf, 4);
+
+    /* 更新 avih 帧数 - avih 在 offset 48 */
+    printf("[Record] Update avih frame count at offset 48: %u\n", ctx->frame_count);
+    lseek(ctx->fd, 48, SEEK_SET);
+    unsigned char frames_buf[4];
+    write_uint32(frames_buf, ctx->frame_count);
+    write(ctx->fd, frames_buf, 4);
+
+    /* 更新 strh dwLength - 在 offset 132 (strh 开始于 100, chunk size 在 104, dwLength 在偏移 28) */
+    printf("[Record] Update strh dwLength at offset 132: %u\n", ctx->frame_count);
+    lseek(ctx->fd, 132, SEEK_SET);
+    unsigned char dwlen_buf[4];
+    write_uint32(dwlen_buf, ctx->frame_count);
+    write(ctx->fd, dwlen_buf, 4);
+
+    /* 更新 movi LIST 大小 */
+    printf("[Record] Updating movi size at offset %u, value=%u\n", movi_size_offset, movi_size);
+    lseek(ctx->fd, movi_size_offset, SEEK_SET);
+    unsigned char movi_size_buf[4];
+    write_uint32(movi_size_buf, movi_size);
+    int w = write(ctx->fd, movi_size_buf, 4);
+    printf("[Record] Write movi size result: %d\n", w);
 
     close(ctx->fd);
     ctx->fd = -1;
 
     pthread_mutex_unlock(&ctx->mutex);
 
-    printf("[Record] AVI container closed: %s, frames=%u, size=%u\n",
-           ctx->filename, ctx->frame_count, ctx->data_size);
+    printf("[Record] AVI closed: %s, frames=%u, size=%u, header=%u, movi_size=%u\n",
+           ctx->filename, ctx->frame_count, final_file_size, ctx->header_size, movi_size);
+
+    /* 打印前3个索引条目用于调试 */
+    if (ctx->index_count > 0) {
+        printf("[Record] Final Index[0]: abs_offset=%u, size=%u, keyframe=%u\n",
+               ctx->frame_index[0].offset, ctx->frame_index[0].size, ctx->frame_index[0].is_keyframe);
+        if (ctx->index_count > 1) {
+            printf("[Record] Final Index[1]: abs_offset=%u, size=%u, keyframe=%u\n",
+                   ctx->frame_index[1].offset, ctx->frame_index[1].size, ctx->frame_index[1].is_keyframe);
+        }
+    }
+    printf("[Record] ========== AVI CLOSE END ==========\n");
 }
 
 /**

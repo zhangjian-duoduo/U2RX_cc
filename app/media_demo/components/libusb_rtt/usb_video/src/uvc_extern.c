@@ -600,7 +600,7 @@ FH_VOID fh_uvc_flash_init(FH_VOID)
 #ifdef FH_APP_USING_HEX_PARA // 跟flash操作相关的，扩展协议（自定义）
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-    pthread_attr_setstacksize(&attr, 4 * 1024);
+    pthread_attr_setstacksize(&attr, 8 * 1024);
     param.sched_priority = 30;
     pthread_attr_setschedparam(&attr, &param);
     if (pthread_create(&g_thread_uvc_extern_intr, &attr, uvc_extern_set, NULL) != 0)
@@ -614,7 +614,7 @@ FH_VOID fh_uvc_flash_init(FH_VOID)
 
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-    pthread_attr_setstacksize(&attr, 4 * 1024);
+    pthread_attr_setstacksize(&attr, 8 * 1024);
     param.sched_priority = 130; /* should sched_priority >= 29 */
     pthread_attr_setschedparam(&attr, &param);
     if (pthread_create(&g_thread_uvc_uspara, &attr, uvc_uspara_proc, NULL) != 0)

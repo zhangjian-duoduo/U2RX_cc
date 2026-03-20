@@ -58,16 +58,23 @@
  *       2: MP4 封装格式
  *       3: 使用用户自定义库 (后续扩展)
  */
-#define UVC_SD_RECORD_FORMAT     2
+#define UVC_SD_RECORD_FORMAT     1
+
+/**
+ * @brief 使用第三方 AVI 库
+ * @note 设置为 1 使用第三方 libfhavi.a 库 (需要H264/H265编码)
+ *       设置为 0 使用内置简化版 AVI 代码
+ */
+#define UVC_USE_THIRD_PARTY_AVI  1
 
 /**
  * @brief SD 卡挂载路径
  */
-#define UVC_SD_MOUNT_PATH        "/mnt/sdcard"
+#define UVC_SD_MOUNT_PATH        "/"
 
 /**
  * @brief 录像文件保存路径
  */
-#define UVC_SD_RECORD_PATH       "/mnt/sdcard"
+#define UVC_SD_RECORD_PATH       "/"
 
 #endif /* __UVC_FEATURE_CONFIG_H__ */
